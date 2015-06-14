@@ -1,0 +1,151 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!-- подключаем xd_connection.js -->
+<script src="//vk.com/js/api/xd_connection.js?2" type="text/javascript"></script>
+<script type="text/javascript" charset="cp1251" >
+	var firstTime = true;
+	window.onload = (function() 
+		{	// когда загрузится вся страница
+			PrepareCanvases();
+			DrawShapes();
+			//window.setTimeout(arguments.callee, 30);
+			if (firstTime)
+			{
+				firstTime = false;
+				VK.init(function()
+				{	// инициализируем Vk API
+					// узнаём flashVars, переданные приложению GET запросом. Сохраняем их в переменную flashVars
+					var parts=document.location.search.substr(1).split("&");
+					var flashVars={}, curr;
+					for (i=0; i<parts.length; i++)
+					{
+						curr = parts[i].split('=');
+						// записываем в массив flashVars значения. Например: flashVars['viewer_id'] = 1;
+						flashVars[curr[0]] = curr[1];
+					}
+					// получаем viewer_id из полученных переменных
+					var viewer_id = flashVars['viewer_id'];
+					// выполняем запрос получения профиля
+
+					VK.api('users.get', {uids:viewer_id, fields:"photo_big"}, function(data) 
+						{
+						// обрабатываем полученные данные
+						// выводим имя и фамилию в блок user_info
+						document.getElementById('user_info').innerHTML = data.response[0].first_name + ' ' + data.response[0].last_name + '<br />';
+						// создаем img, для отображения аватарки
+						var image=document.createElement('img');
+	        				// из полученных данных берем ссылку на фото
+						image.src=data.response[0].photo_big;
+						// добавляем img в блок user_info
+						user_info.appendChild(image);
+						});
+ 				});
+			}
+	});
+</script>
+	</head>
+	<body>
+		<script>
+			var shape = new Shape(getRandomArbitary(1,3), getRandomArbitary(1,3));
+			//window.onload = function(){
+			//	(function(){
+			//		PrepareCanvases();
+			//		DrawShapes();
+			//		})();
+			//	};
+
+			function Shape(type, color){	
+				this.type = type;
+				this.color = color;
+				this.getRandomShape = function(){
+					return new Shape(getRandomArbitary(1,3), getRandomArbitary(1,3));
+					}
+				this.colorString = function(){
+					if (color === 1)
+						return "#FF0000";
+					if (color === 2)
+						return "#00FF00";
+					if (color === 3)
+						return "#0000FF";
+					}
+				}
+			function drawTriangle(context, x, y, triangleWidth, triangleHeight){
+				context.beginPath();
+				context.moveTo(x, y);
+				context.lineTo(x + triangleWidth / 2, y + triangleHeight);
+				context.lineTo(x - triangleWidth / 2, y + triangleHeight);
+				context.closePath();
+				}
+			function getRandomArbitary(min, max){ return Math.round(Math.random() * (max - min) + min); }
+			function sendChoise(i,j){ if (shape.type === i & shape.color == j) {alert("Yes It Is!"); shape = new Shape(getRandomArbitary(1,3), getRandomArbitary(1,3));} else {alert("selected: [" + i + "," + j+"]");} }
+			function W(){	return 100;}
+			function H(){	return W();}
+			function PrepareCanvases(){PrepareCanvas(1, 1);	PrepareCanvas(1, 2);PrepareCanvas(1, 3);PrepareCanvas(2, 1);PrepareCanvas(2, 2);PrepareCanvas(2, 3);PrepareCanvas(3, 1);PrepareCanvas(3, 2);PrepareCanvas(3, 3);}
+			function PrepareCanvas(i, j){var canvas = document.getElementById("c"+i+j);  canvas.width=W(); canvas.height=H();}
+			function DrawShapes(){DrawShape(1, 1);DrawShape(1, 2);DrawShape(1, 3);DrawShape(2, 1);DrawShape(2, 2);DrawShape(2, 3);DrawShape(3, 1);DrawShape(3, 2);DrawShape(3, 3);}
+			function DrawShape(i, j){DrawShape(i, j, false);}
+			function DrawShape(i, j, selected){
+				var shape = new Shape(i,j);
+				var main = document.getElementById("c"+i+j);
+				var context = main.getContext("2d");
+				var centerX = main.width / 2;
+				var centerY = main.height / 2;
+				context.rect(0, 0, main.width, main.height);
+				context.fillStyle = 'white';
+				context.fill();
+				var radius = W()-10;
+				context.beginPath();
+				if (shape.type === 2)
+					context.arc(centerX, centerY, radius/2, 0, 2 * Math.PI, false);
+				if (shape.type === 1)
+					context.rect(centerX-radius/2, centerY-radius/2, radius, radius);
+				if (shape.type === 3)
+					drawTriangle(context, radius/2+5, 0, radius, radius)
+				context.fillStyle = shape.colorString();
+				context.fill();
+
+
+				if (selected)
+				{
+					context.strokeStyle = '#000000';
+					context.lineWidth = 3;
+				}
+				else
+				{
+					context.strokeStyle = '#808080';
+					context.lineWidth = 1;
+				}
+				context.stroke();
+				}
+			function redraw() {DrawShapes();}
+
+			function selectShape(i,j)
+			{
+				DrawShapes();
+				DrawShape(i,j,true);
+			}
+			
+		</script>
+		<center>
+		<table>
+			<tr>
+				<td onmouseover = "selectShape(1,1)" onmouseout = "redraw()" onclick="sendChoise(1,1)" width = "W()" height="H()"><canvas id = "c11"></canvas></td>
+				<td onmouseover = "selectShape(1,2)" onmouseout = "redraw()" onclick="sendChoise(1,2)" width = "W()" height="H()"><canvas id = "c12"></canvas></td>
+				<td onmouseover = "selectShape(1,3)" onmouseout = "redraw()" onclick="sendChoise(1,3)" width = "W()" height="H()"><canvas id = "c13"></canvas></td>
+			</tr>
+			<tr>
+				<td onmouseover = "selectShape(2,1)" onmouseout = "redraw()" onclick="sendChoise(2,1)" width = "W()" height="H()"><canvas id = "c21"></canvas></td>
+				<td onmouseover = "selectShape(2,2)" onmouseout = "redraw()" onclick="sendChoise(2,2)" width = "W()" height="H()"><canvas id = "c22"></canvas></td>
+				<td onmouseover = "selectShape(2,3)" onmouseout = "redraw()" onclick="sendChoise(2,3)" width = "W()" height="H()"><canvas id = "c23"></canvas></td>
+			</tr>
+			<tr>
+				<td onmouseover = "selectShape(3,1)" onmouseout = "redraw()" onclick="sendChoise(3,1)" width = "W()" height="H()"><canvas id = "c31"></canvas></td>
+				<td onmouseover = "selectShape(3,2)" onmouseout = "redraw()" onclick="sendChoise(3,2)" width = "W()" height="H()"><canvas id = "c32"></canvas></td>
+				<td onmouseover = "selectShape(3,3)" onmouseout = "redraw()" onclick="sendChoise(3,3)" width = "W()" height="H()"><canvas id = "c33"></canvas></td>
+			</tr>
+		</table>
+		<div id="user_info"></div>
+		</center>
+	</body>
+</html>
