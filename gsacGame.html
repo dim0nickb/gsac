@@ -1,7 +1,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<!-- подключаем xd_connection.js -->
+<!-- РїРѕРґРєР»СЋС‡Р°РµРј xd_connection.js -->
 <script src="//vk.com/js/api/xd_connection.js?2" type="text/javascript"></script>
 <script type="text/javascript" charset="cp1251" >
 	var firstTime = true;
@@ -14,30 +14,30 @@
 			{
 				firstTime = false;
 				VK.init(function()
-				{	// инициализируем Vk API
-					// узнаём flashVars, переданные приложению GET запросом. Сохраняем их в переменную flashVars
+				{	// РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј Vk API
+					// СѓР·РЅР°С‘Рј flashVars, РїРµСЂРµРґР°РЅРЅС‹Рµ РїСЂРёР»РѕР¶РµРЅРёСЋ GET Р·Р°РїСЂРѕСЃРѕРј. РЎРѕС…СЂР°РЅСЏРµРј РёС… РІ РїРµСЂРµРјРµРЅРЅСѓСЋ flashVars
 					var parts=document.location.search.substr(1).split("&");
 					var flashVars={}, curr;
 					for (i=0; i<parts.length; i++)
 					{
 						curr = parts[i].split('=');
-						// записываем в массив flashVars значения. Например: flashVars['viewer_id'] = 1;
+						// Р·Р°РїРёСЃС‹РІР°РµРј РІ РјР°СЃСЃРёРІ flashVars Р·РЅР°С‡РµРЅРёСЏ. РќР°РїСЂРёРјРµСЂ: flashVars['viewer_id'] = 1;
 						flashVars[curr[0]] = curr[1];
 					}
-					// получаем viewer_id из полученных переменных
+					// РїРѕР»СѓС‡Р°РµРј viewer_id РёР· РїРѕР»СѓС‡РµРЅРЅС‹С… РїРµСЂРµРјРµРЅРЅС‹С…
 					var viewer_id = flashVars['viewer_id'];
-					// выполняем запрос получения профиля
+					// РІС‹РїРѕР»РЅСЏРµРј Р·Р°РїСЂРѕСЃ РїРѕР»СѓС‡РµРЅРёСЏ РїСЂРѕС„РёР»СЏ
 
 					VK.api('users.get', {uids:viewer_id, fields:"photo_big"}, function(data) 
 						{
-						// обрабатываем полученные данные
-						// выводим имя и фамилию в блок user_info
+						// РѕР±СЂР°Р±Р°С‚С‹РІР°РµРј РїРѕР»СѓС‡РµРЅРЅС‹Рµ РґР°РЅРЅС‹Рµ
+						// РІС‹РІРѕРґРёРј РёРјСЏ Рё С„Р°РјРёР»РёСЋ РІ Р±Р»РѕРє user_info
 						document.getElementById('user_info').innerHTML = data.response[0].first_name + ' ' + data.response[0].last_name + '<br />';
-						// создаем img, для отображения аватарки
+						// СЃРѕР·РґР°РµРј img, РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ Р°РІР°С‚Р°СЂРєРё
 						var image=document.createElement('img');
-	        				// из полученных данных берем ссылку на фото
+	        				// РёР· РїРѕР»СѓС‡РµРЅРЅС‹С… РґР°РЅРЅС‹С… Р±РµСЂРµРј СЃСЃС‹Р»РєСѓ РЅР° С„РѕС‚Рѕ
 						image.src=data.response[0].photo_big;
-						// добавляем img в блок user_info
+						// РґРѕР±Р°РІР»СЏРµРј img РІ Р±Р»РѕРє user_info
 						user_info.appendChild(image);
 						});
  				});
@@ -146,7 +146,9 @@
 			</tr>
 		</table>
 		<br>
-		<div id="user_info"></div>
+		<div id="user_info">
+		...
+		</div>
 		</center>
 	</body>
 </html>
