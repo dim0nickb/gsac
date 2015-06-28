@@ -49,7 +49,7 @@ function runGame(response, postData) {
 
 function testSQL(response, postData){
 	console.log("Request handler 'testSQL' was called");
-	var mysql      = require('mysql');
+	var mysql      = require('node-mysql');
 	var connection = mysql.createConnection({
 	  host     : '173.194.86.81',
 	  user     : 'root',
