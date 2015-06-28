@@ -19,18 +19,20 @@ function exec(query){
 	pool.getConnection(function (err, connection) {
 		// Use the connection
 		connection.query(query, function (err, rows) {
-					if (!err) {
-						console.log(rows);
-						res = rows;
-					}
-					else
-						console.log('Error while performing Query.');
+			if (!err) {
+				console.log(rows);
+				res = rows;
+				return res;
+			}
+			else {
+				console.log('Error while performing Query.');
+				return res;
+			}
 			// And done with the connection.
 			connection.release();
 		// Don't use the connection here, it has been returned to the pool.
 		});
 	});
-	return res;
 }
 //function exec(query) {
 //	var res = [];
