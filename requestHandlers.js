@@ -61,17 +61,18 @@ function testSQL(response, postData){
 	connection.connect();
 
 	connection.query('SELECT * FROM users', function(err, rows, fields) {
+		connection.release();
 		if (!err)
 		{
 			console.log('The solution is: ', rows);
 			response.writeHead(200, {"Content-Type": "text/html"});
 			response.write('<html><body><table>');
-			for (var i = 0; i<rows.count; i++)
+			for (var i = 0; i<rows.length; i++)
 			{
 				response.write('<tr><td>'+rows[i]['userID']+' : '+rows[i]['total']+' : '+rows[i]['score']+'</td></tr>');
 			}
 			response.write('</table></body></html>');
-			response.end('rows.count == ' + rows.count);
+			response.end();
 		}
 		else
 		console.log('Error while performing Query.');
