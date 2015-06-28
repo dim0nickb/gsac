@@ -11,7 +11,8 @@ function exec(query) {
 	connection.connect();
 	connection.query(query, function (err, rows, fields) {
 		if (!err) {
-			res = rows;
+			console.log(rows);
+			//res = rows;
 		}
 		else
 			console.log('Error while performing Query.');
