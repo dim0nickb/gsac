@@ -49,17 +49,24 @@ function runGame(response, postData) {
 
 function testSQL(response, postData){
 	console.log("Request handler 'testSQL' was called");
-	fs.readFile("testConnection.js", function(err, info)
-	{
-		if (err)
-		{
-			console.error(err);
-			response.statusCode = 500;
-			response.end("Error @ server!");
-			return;
-		}
-		response.end(info);
+	var mysql      = require('mysql');
+	var connection = mysql.createConnection({
+	  host     : '173.194.86.81',
+	  user     : 'root',
+	  password : 'siskipiski',
+	  database : 'gsac'
 	});
+
+	connection.connect();
+
+	connection.query('SELECT * from users', function(err, rows, fields) {
+	  if (!err)
+		console.log('The solution is: ', rows);
+	  else
+		console.log('Error while performing Query.');
+	});
+
+	connection.end();
 }
 
 exports.start = start;
