@@ -61,7 +61,6 @@ function testSQL(response, postData){
 	connection.connect();
 
 	connection.query('SELECT * FROM users', function(err, rows, fields) {
-		connection.release();
 		if (!err)
 		{
 			console.log('The solution is: ', rows);
