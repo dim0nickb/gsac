@@ -55,6 +55,7 @@ function addUser(userID) {
 	var q = 'SELECT * FROM users WHERE userID = ' + userID + ';';
 	console.log(q);
 	var res = exec(q);
+	console.log(res);
 	if (res.length === 0) {
 		q = 'INSERT INTO users (userID, total, score) VALUES (' + userID + ', 0, 0);';
 		console.log(q);
