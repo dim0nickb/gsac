@@ -43,7 +43,9 @@ function runGame(response, postData) {
 			response.end("Error @ server!");
 			return;
 		}
-		response.end(info);
+		response.writeHead(200, { "Content-Type": "text/html" });
+		response.write(info);
+		response.end();
 	});
 }
 
