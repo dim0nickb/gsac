@@ -79,7 +79,7 @@ function testSQL(response, postData){
 		}, cb);
 	};
 	
-	DB.end();
+	//DB.end();
 }
 
 exports.start = start;
