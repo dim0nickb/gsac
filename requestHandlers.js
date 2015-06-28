@@ -47,6 +47,22 @@ function runGame(response, postData) {
 	});
 }
 
+function testSQL(response, postData){
+	console.log("Request handler 'testSQL' was called");
+	fs.readFile("testConnection.js", function(err, info)
+	{
+		if (err)
+		{
+			console.error(err);
+			response.statusCode = 500;
+			response.end("Error @ server!");
+			return;
+		}
+		response.end(info);
+	});
+}
+
 exports.start = start;
 exports.upload = upload;
 exports.runGame = runGame;
+exports.testSQL = testSQL;
