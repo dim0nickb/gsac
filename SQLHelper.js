@@ -7,16 +7,17 @@ var connection = mysql.createConnection({
 });
 
 function exec(query) {
+	var res = [];
 	connection.connect();
 	connection.query(query, function (err, rows, fields) {
 		if (!err) {
-			return rows;
+			res = rows;
 		}
 		else
 			console.log('Error while performing Query.');
 	});
 	connection.end();
-	return new Array();
+	return res;
 }
 function isNumber(obj) { return !isNaN(parseFloat(obj)) }
 
