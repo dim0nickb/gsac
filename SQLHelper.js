@@ -16,6 +16,7 @@ function exec(query) {
 			console.log('Error while performing Query.');
 	});
 	connection.end();
+	return new Array();
 }
 function isNumber(obj) { return !isNaN(parseFloat(obj)) }
 
@@ -24,7 +25,8 @@ function addUser(userID) {
 		return false;
 
 	var q = 'SELECT * FROM users WHERE userID = ' + userID;
-	if (exec(q).length === 0) {
+	var res = exec(q);
+	if (res.length === 0) {
 		q = 'INSERT INTO users (userID, total, score) VALUES (' + userID + '0, 0';
 		exec(q);
 	}
