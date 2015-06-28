@@ -30,3 +30,6 @@ function addUser(userID) {
 	}
 	return true;
 }
+
+exports.addUser = addUser;
+exports.exec = exec;
