@@ -49,37 +49,28 @@ function runGame(response, postData) {
 
 function testSQL(response, postData){
 	console.log("Request handler 'testSQL' was called");
-	var db = require('node-mysql');
-	var DB = db.DB;
-	var BaseRow = db.Row;
-	var BaseTable = db.Table;
 	
-	var box = new DB({
-		host     : '173.194.86.81',
+	var mysql      = require('mysql');
+	var connection = mysql.createConnection({
+		host     : '173.194.86.81:8888',
 		user     : 'root',
 		password : 'siskipiski',
-		database : 'gsac',
-		connectionLimit: 50,
-		useTransaction: {
-			connectionLimit: 20
-		}
+		database : 'gsac'
 	});
 
-	var basicTest = function(cb) {
-		box.connect(function(conn, cb) {
-			cps.seq([
-				function(_, cb) {
-					conn.query('select * from gsac.users', cb);
-				},
-				function(res, cb) {
-					console.log(res);
-					cb();
-				}
-			], cb);
-		}, cb);
-	};
-	
-	//DB.end();
+	connection.connect();
+
+	connection.query('SELECT * FROM users', function(err, rows, fields) {
+		if (!err)
+		{
+			console.log('The solution is: ', rows);
+			response.json(rows);
+		}
+		else
+		console.log('Error while performing Query.');
+	});
+
+	connection.end();
 }
 
 exports.start = start;
