@@ -13,7 +13,20 @@ function start(route, handle) {
 		var sqlHelper = require('./SQLHelper.js');
 		if (!sqlHelper.addUser(viewer_id)) {
 			response.statusCode = 500;
-			response.end("Bad user! Please contact to <a href = 'http://vk.com/drgonza'>developer</a>");
+			var s = 
+				'<html>' +
+				'<head>' +
+				'<meta http-equiv="Content-Type" content="text/html; ' +
+				'charset=UTF-8" />' +
+				'</head>' +
+				'<body>' +
+				'<div id = "badUser">Bad user !<BR>Please contact to < a href = "http://vk.com/drgonza">developer</a></div>' +
+				'</body>' +
+				'</html>';
+			response.writeHead(200, { "Content-Type": "text/html" });
+			response.write(s);
+			response.end();
+			return;
 		}
 
 		var postData = "";
