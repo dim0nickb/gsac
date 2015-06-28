@@ -71,7 +71,7 @@ function testSQL(response, postData){
 				response.write('<tr><td>'+rows[i]['userID']+' : '+rows[i]['total']+' : '+rows[i]['score']+'</td></tr>');
 			}
 			response.write('</table></body></html>');
-			response.end();
+			response.end('rows.count == ' + rows.count);
 		}
 		else
 		console.log('Error while performing Query.');
