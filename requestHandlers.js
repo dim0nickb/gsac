@@ -69,7 +69,7 @@ function testSQL(response, postData){
 		box.connect(function(conn, cb) {
 			cps.seq([
 				function(_, cb) {
-					conn.query('select * from users', cb);
+					conn.query('select * from gsac.users', cb);
 				},
 				function(res, cb) {
 					console.log(res);
