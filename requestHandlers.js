@@ -64,7 +64,14 @@ function testSQL(response, postData){
 		if (!err)
 		{
 			console.log('The solution is: ', rows);
-			response.json(rows);
+			response.writeHead(200, {"Content-Type": "text/html"});
+			response.write('<html><body><table>');
+			for (var i = 0; i<rows.count; i++)
+			{
+				response.write('<tr><td>'+rows[i]['userID']+' : '+rows[i]['total']+' : '+rows[i]['score']+'</td></tr>');
+			}
+			response.write('</table></body></html>');
+			response.end();
 		}
 		else
 		console.log('Error while performing Query.');
