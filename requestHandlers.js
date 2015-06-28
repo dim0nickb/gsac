@@ -52,7 +52,7 @@ function testSQL(response, postData){
 	
 	var mysql      = require('mysql');
 	var connection = mysql.createConnection({
-		host     : '173.194.86.81:8888',
+		host     : '173.194.86.81',
 		user     : 'root',
 		password : 'siskipiski',
 		database : 'gsac'
