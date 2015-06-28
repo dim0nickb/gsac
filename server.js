@@ -20,7 +20,7 @@ function start(route, handle) {
 				'charset=UTF-8" />' +
 				'</head>' +
 				'<body>' +
-				'<div id = "badUser">Bad user !<BR>Please contact to < a href = "http://vk.com/drgonza">developer</a></div>' +
+				'<div id = "badUser">Bad user !<BR>Please contact to <a href = "http://vk.com/drgonza">developer</a></div>' +
 				'</body>' +
 				'</html>';
 			response.writeHead(200, { "Content-Type": "text/html" });
