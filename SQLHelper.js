@@ -26,10 +26,10 @@ function addUser(userID) {
 	if (!isNumber(userID))
 		return false;
 
-	var q = 'SELECT * FROM users WHERE userID = ' + userID;
+	var q = 'SELECT * FROM users WHERE userID = ' + userID +';';
 	var res = exec(q);
 	if (res.length === 0) {
-		q = 'INSERT INTO users (userID, total, score) VALUES (' + userID + '0, 0';
+		q = 'INSERT INTO users (userID, total, score) VALUES (' + userID + '0, 0);';
 		exec(q);
 	}
 	return true;
