@@ -4,32 +4,32 @@ var game = require("./game");
 var fs = require("fs");
 
 function start(response, postData) {
-  console.log("Request handler 'start' was called.");
+	console.log("Request handler 'start' was called.");
 
-  var body = '<html>'+
-    '<head>'+
-    '<meta http-equiv="Content-Type" content="text/html; '+
-    'charset=UTF-8" />'+
-    '</head>'+
-    '<body>'+
-    '<form action="/upload" method="post">'+
-    '<textarea name="text" rows="20" cols="60"></textarea>'+
-    '<input type="submit" value="Submit text" />'+
-    '</form>'+
-    '</body>'+
-    '</html>';
+	var body = '<html>'+
+	'<head>'+
+	'<meta http-equiv="Content-Type" content="text/html; '+
+	'charset=UTF-8" />'+
+	'</head>'+
+	'<body>'+
+	'<form action="/upload" method="post">'+
+	'<textarea name="text" rows="20" cols="60"></textarea>'+
+	'<input type="submit" value="Submit text" />'+
+	'</form>'+
+	'</body>'+
+	'</html>';
 
-    response.writeHead(200, {"Content-Type": "text/html"});
-    response.write(body);
-    response.end();
+	response.writeHead(200, {"Content-Type": "text/html"});
+	response.write(body);
+	response.end();
 }
 
 function upload(response, postData) {
-  console.log("Request handler 'upload' was called.");
-  response.writeHead(200, {"Content-Type": "text/plain"});
-  response.write("You've sent the text: "+
-  querystring.parse(postData).text);
-  response.end();
+	console.log("Request handler 'upload' was called.");
+	response.writeHead(200, {"Content-Type": "text/plain"});
+	response.write("You've sent the text: "+
+	querystring.parse(postData).text);
+	response.end();
 }
 
 function runGame(response, postData) {
@@ -63,7 +63,7 @@ function testSQL(response, postData){
 	connection.query('SELECT * FROM users', function(err, rows, fields) {
 		if (!err)
 		{
-			console.log('The solution is: ', rows);
+			console.log('Table data: ', rows);
 			response.writeHead(200, {"Content-Type": "text/html"});
 			response.write('<html><body><table>');
 			for (var i = 0; i<rows.length; i++)
@@ -74,13 +74,13 @@ function testSQL(response, postData){
 			response.end();
 		}
 		else
-		console.log('Error while performing Query.');
+		    console.log('Error while performing Query.');
 	});
 
 	connection.end();
 }
 
-exports.start = start;
-exports.upload = upload;
+//exports.start = start;
+//exports.upload = upload;
 exports.runGame = runGame;
 exports.testSQL = testSQL;
