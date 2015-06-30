@@ -43,9 +43,12 @@ function runGame(response, postData) {
 			response.end("Error @ server!");
 			return;
 		}
-		response.writeHead(200, { "Content-Type": "text/html" });
-		response.write(info);
-		response.end();
+		else
+		{
+			response.writeHead(200, { "Content-Type": "text/html" });
+			response.write(info);
+			response.end();
+		}
 	});
 }
 
@@ -82,7 +85,20 @@ function testSQL(response, postData){
 	connection.end();
 }
 
+function updateUserInfo(response, postData)
+{
+	var viewer_id = querystring.parse(postData).viewer_id;
+	var res = querystring.parse(postData).res;
+	if (res)
+		alert("Поздравляем, вы выбрали верный вариант!")
+	else
+		alert("К сожалению, вы выбрали не верный вариант!")
+	var sqlHelper = require('./SQLHelper.js');
+	sqlHelper.updateUserInfo(viewer_id, res);
+}
+
 //exports.start = start;
 //exports.upload = upload;
 exports.runGame = runGame;
-exports.testSQL = testSQL;
+exports.updateUserInfo = updateUserInfo;
+//exports.testSQL = testSQL;

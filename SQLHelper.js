@@ -55,7 +55,38 @@ function addUser(userID,  callback) {
 
 }
 
+function updateUserInfo(userID,  callback, res) {
+	var cb = callback;
+	if (!isNumber(userID))
+		return false;
 
+	var q = 'SELECT * FROM users WHERE userID = ' + userID + ';';
+	console.log(q);
+	exec(q, insertNewUser);
 
+	function updateUser(rows, res) {
+		if (!res)
+			cb(false);
+		console.log(rows);
+		console.log(rows.length);
+		if (rows.length > 0) {
+			var total = rows[0]["total"]+1;
+			var score = rows[0]["score"];
+			if (res)
+				score++;
+			q = 'UPDATE users SET userID = ' + rows[0]["userID"] + ', total = ' + total + ', score = ' + score + ';';
+			console.log(q);
+			exec(q, done);
+		}
+		else
+			cb(false);
+	}
+
+	function done(rows, res) {
+		cb(res);
+	}
+}
+
+exports.updateUserInfo = updateUserInfo;
 exports.addUser = addUser;
 exports.exec = exec;
