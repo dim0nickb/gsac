@@ -87,6 +87,7 @@ function testSQL(response, postData){
 
 function updateUserInfo(response, postData)
 {
+	console.log("updateUserInfo called!");
 	var viewer_id = querystring.parse(postData).viewer_id;
 	var res = querystring.parse(postData).res;
 	if (res)
