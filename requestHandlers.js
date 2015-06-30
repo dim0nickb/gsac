@@ -85,9 +85,9 @@ function testSQL(response, postData){
 	connection.end();
 }
 
-function updateUserInfo(response, postData)
+function updateUser(response, postData)
 {
-	console.log("updateUserInfo called!");
+	console.log("updateUser called!");
 	var viewer_id = querystring.parse(postData).viewer_id;
 	var res = querystring.parse(postData).res;
 	if (res)
@@ -101,5 +101,5 @@ function updateUserInfo(response, postData)
 //exports.start = start;
 //exports.upload = upload;
 exports.runGame = runGame;
-exports.updateUserInfo = updateUserInfo;
+exports.updateUser = updateUser;
 //exports.testSQL = testSQL;

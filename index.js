@@ -4,7 +4,7 @@ var requestHandlers = require("./requestHandlers");
 
 var handle = {}
 handle["/"] = requestHandlers.runGame;
-handle["/updateUserInfo"] = requestHandlers.updateUserInfo;
+handle["/updateUser"] = requestHandlers.updateUser;
 //handle["/testSQL"] = requestHandlers.testSQL;
 
 server.start(router.route, handle);
