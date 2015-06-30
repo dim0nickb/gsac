@@ -7,11 +7,13 @@ var pool = mysql.createPool({
 });
 
 function exec(q, callback){
-	pool.getConnection(function (err, connection, callback) {
-			connection.query(q, function onExec(err, rows, callbaCK) {
+	var cb = callback;
+	pool.getConnection(function (err, connection) {
+			connection.query(q, function onExec(err, rows) {
 				if (!err) {
-					console.log('callback called with result: ' + rows);
-					callback(rows);
+					console.log('callback called with result: ');
+					console.log(rows);
+					cb(rows);
 				}
 				else {
 					console.log('Error while performing Query.');
