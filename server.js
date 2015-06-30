@@ -33,7 +33,7 @@ function start(route, handle) {
 				var pathname = url.parse(request.url).pathname;
 				
 				request.setEncoding("utf8");
-				/*
+				
 				request.addListener("data", function (postDataChunk) {
 					postData += postDataChunk;
 					console.log("Received POST data chunk '" + postDataChunk + "'.");
