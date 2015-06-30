@@ -35,6 +35,7 @@ function addUser(userID,  callback) {
 
 	function insertNewUser(res) {
 		console.log(res);
+		console.log(res.length);
 		if (res.length === 0) {
 			q = 'INSERT INTO users (userID, total, score) VALUES (' + userID + ', 0, 0);';
 			console.log(q);
