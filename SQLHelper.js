@@ -8,20 +8,18 @@ var pool = mysql.createPool({
 
 function exec(q, callback){
 	pool.getConnection(function (err, connection, callback) {
-			connection.query(q, onExec);
+			connection.query(q, function onExec(err, rows, callbaCK) {
+				if (!err) {
+					console.log('callback called with result: ' + rows);
+					callback(rows);
+				}
+				else {
+					console.log('Error while performing Query.');
+				}
+			});
 			connection.release();
 		});
 }
-
-function onExec(err, rows, callbaCK) {
-	if (!err) {
-		console.log(rows);
-		callback(rows);
-	}
-	else {
-		console.log('Error while performing Query.');
-	}
-};
 
 function isNumber(obj) { return !isNaN(parseFloat(obj)) }
 
