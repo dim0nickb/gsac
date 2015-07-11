@@ -30,7 +30,7 @@ function start(route, handle) {
 			}
 			else
 			{
-				//var postData = "";
+				var postData = "";
 				var pathname = url.parse(request.url).pathname;
                 console.log(pathname);
 
