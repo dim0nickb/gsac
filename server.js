@@ -2,7 +2,8 @@ var http = require("http");
 var url = require("url");
 
 function start(route, handle) {
-	function onRequest(request, response) {
+    function onRequest(request, response) {
+        console.log(request);
 		//пробуем зарегистрировать пользователя.
 		var url_parts = url.parse(request.url, true);
 		var query = url_parts.query;
