@@ -11,8 +11,16 @@ function start(route, handle) {
 		// получаем viewer_id из полученных переменных
 		var viewer_id = query['viewer_id'];
 		// выполняем запрос получения профиля
+		var postData = "";
+		var pathname = url.parse(request.url).pathname;
+		console.log(pathname);
+		request.setEncoding("utf8");
+		request.addListener("end", function () {
+			route(handle, pathname, response, postData);
+		});
+		
+		/*
 		sqlHelper.addUser(viewer_id, function (res) {
-			/*
 			if (!res) {
 				response.statusCode = 500;
 				var s = '<html>' +
@@ -30,27 +38,18 @@ function start(route, handle) {
 				return;
 			}
 			else
-				/**/
 			{
 				var postData = "";
 				var pathname = url.parse(request.url).pathname;
                 console.log(pathname);
-				/*
-			
-				request.addListener("data", function (postDataChunk) {
-					//postData += postDataChunk;
-					console.log("Received POST data chunk '" + postDataChunk + "'.");
-                });
-                request.addListener("get", function (postDataChunk) {
-                    console.log("Received GET data chunk '" + postDataChunk + "'.");
-                });
-				/**/
+
 				request.setEncoding("utf8");
 				request.addListener("end", function () {
 					route(handle, pathname, response, postData);
 				});
 			}
 		});
+		/**/
 	}
 
 	http.createServer(onRequest).listen(8888);
