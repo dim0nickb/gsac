@@ -3,10 +3,10 @@ var url = require("url");
 
 function start(route, handle) {
     function onRequest(request, response) {
-        console.log(request);
 		//пробуем зарегистрировать пользователя.
 		var url_parts = url.parse(request.url, true);
-		var query = url_parts.query;
+        var query = url_parts.query;
+        console.log(query);
 		// получаем viewer_id из полученных переменных
 		var viewer_id = query['viewer_id'];
 		// выполняем запрос получения профиля
