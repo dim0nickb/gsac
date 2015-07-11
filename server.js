@@ -1,5 +1,6 @@
 var http = require("http");
 var url = require("url");
+var sqlHelper = require('./SQLHelper.js');
 
 function start(route, handle) {
     function onRequest(request, response) {
@@ -10,8 +11,8 @@ function start(route, handle) {
 		// получаем viewer_id из полученных переменных
 		var viewer_id = query['viewer_id'];
 		// выполняем запрос получения профиля
-		var sqlHelper = require('./SQLHelper.js');
 		sqlHelper.addUser(viewer_id, function (res) {
+			/*
 			if (!res) {
 				response.statusCode = 500;
 				var s = '<html>' +
@@ -29,21 +30,22 @@ function start(route, handle) {
 				return;
 			}
 			else
+				/**/
 			{
 				var postData = "";
 				var pathname = url.parse(request.url).pathname;
                 console.log(pathname);
-
-				request.setEncoding("utf8");
-				
+				/*
+			
 				request.addListener("data", function (postDataChunk) {
 					//postData += postDataChunk;
 					console.log("Received POST data chunk '" + postDataChunk + "'.");
                 });
-                request.addListener("data", function (postDataChunk) {
+                request.addListener("get", function (postDataChunk) {
                     console.log("Received GET data chunk '" + postDataChunk + "'.");
                 });
 				/**/
+				request.setEncoding("utf8");
 				request.addListener("end", function () {
 					route(handle, pathname, response, postData);
 				});
