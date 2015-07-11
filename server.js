@@ -6,7 +6,7 @@ function start(route, handle) {
 		//пробуем зарегистрировать пользователя.
 		var url_parts = url.parse(request.url, true);
         var query = url_parts.query;
-        console.log(query);
+        console.log(request.url);
 		// получаем viewer_id из полученных переменных
 		var viewer_id = query['viewer_id'];
 		// выполняем запрос получения профиля
