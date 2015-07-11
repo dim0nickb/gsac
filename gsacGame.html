@@ -99,7 +99,7 @@
 			function sendInfo(val)
 			{
 				var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
-				xmlhttp.open('GET', '/updateUser', true); // Открываем асинхронное соединение
+				xmlhttp.open('POST', 'updateUser', true); // Открываем асинхронное соединение
 				xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
 				xmlhttp.send("viewer_id=" + encodeURIComponent(viewer_id) + "&res=" + encodeURIComponent(val)); // Отправляем POST-запрос
 				/*
