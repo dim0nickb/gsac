@@ -32,8 +32,16 @@ function upload(response, postData) {
 	response.end();
 }
 
+
+var gameHtml = fs.readFileSync("gsacGame.html");
 function runGame(response, postData) {
-	console.log("Request handler 'runGame' was called.");
+
+    console.log("Request handler 'runGame' was called.");
+    response.writeHead(200, { "Content-Type": "text/html" });
+    response.write(gameHtml);
+    response.end();
+
+    /*
 	fs.readFile("gsacGame.html", function(err, info)
 	{
 		if (err)
@@ -49,7 +57,8 @@ function runGame(response, postData) {
 			response.write(info);
 			response.end();
 		}
-	});
+    });
+    /**/
 }
 
 function testSQL(response, postData){
