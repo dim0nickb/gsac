@@ -91,9 +91,9 @@ function updateUser(response, postData)
 	var viewer_id = querystring.parse(postData).viewer_id;
 	var res = querystring.parse(postData).res;
 	if (res)
-		alert("Поздравляем, вы выбрали верный вариант!")
+		alert("Поздравляем," + viewer_id + " вы выиграли!")
 	else
-		alert("К сожалению, вы выбрали не верный вариант!")
+		alert("К сожалению," + viewer_id + " вы проиграли!")
 	var sqlHelper = require('./SQLHelper.js');
 	sqlHelper.updateUserInfo(viewer_id, res);
 }
